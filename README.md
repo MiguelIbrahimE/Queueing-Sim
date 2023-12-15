@@ -136,5 +136,88 @@ The main function initializes the parameters, creates the birth-death matrix, an
 ## Running the Simulation
 
 The script initializes the parameters, creates the birth-death matrix, and runs the simulation for different alpha values. It prints the minimum capacity required and the achieved alpha for each alpha value.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
----
+
+# Energy System Simulation
+
+This is a detailed explanation of an energy system simulation code written in Python. The simulation models an energy system with a Markovian ON-OFF process. The code uses NumPy for numerical operations.
+
+## `create_birth_death_matrix` Function
+
+```python
+import numpy as np
+
+def create_birth_death_matrix(M, p_minus, p_plus):
+    """
+    Create a birth-death matrix for a Markov chain.
+
+    Args:
+        M (int): Number of states in the Markov chain.
+        p_minus (float): Probability of transitioning to a lower state (death probability).
+        p_plus (float): Probability of transitioning to a higher state (birth probability).
+
+    Returns:
+        np.array: A square matrix representing the birth-death transitions.
+    """
+    Q = np.zeros((M, M))  # Initialize a matrix of zeros
+
+    # Setting the transition probabilities
+    for i in range(M):
+        if i > 0:
+            Q[i, i - 1] = p_minus  # Set the transition probability to the previous state (death)
+        if i < M - 1:
+            Q[i, i + 1] = p_plus  # Set the transition probability to the next state (birth)
+
+        # Set the probability of remaining in the current state
+        if i == 0:
+            Q[i, i] = 1 - p_plus
+        elif i == M - 1:
+            Q[i, i] = 1 - p_minus
+        else:
+            Q[i, i] = 1 - p_minus - p_plus
+
+    return Q
+
+   
+```
+ The create_birth_death_matrix function generates a birth-death matrix for a Markov chain.
+    It takes three arguments: M (number of states), p_minus (death probability), and p_plus (birth probability).
+    The function initializes a square matrix Q of size M x M with zeros.
+    It then sets the transition probabilities for each state based on the provided probabilities.
+    ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    ```python
+    class EnergySystemSimulation:
+    """
+    A class to simulate an energy system with a Markovian ON-OFF process.
+    
+    ... (attributes and methods) ...
+    """
+    def __init__(self, M, Q, lambda_rate, C, B, e, alpha, time_step, total_time, eta_charge, eta_discharge):
+        # Constructor method to initialize attributes
+        ... (attributes initialization) ...
+
+    def next_state(self):
+        # Method to determine the next state of the Markov chain
+        ...
+
+    def generate_job_energy_requirement(self):
+        # Method to generate a random energy requirement for a job
+        ...
+
+    def simulate_step(self):
+        # Method to simulate a single step in the energy system
+        ...
+
+    def run_simulation(self):
+        # Method to run the entire simulation and return peak battery capacity needed
+        ...
+
+    def calculate_achieved_alpha(self):
+        # Method to calculate the achieved alpha value
+        ```
+        ```
+The EnergySystemSimulation class represents the energy system simulation.
+The __init__ method is the constructor that initializes the attributes of the simulation.
+The class contains several methods, including next_state to determine the next state of the Markov chain, generate_job_energy_requirement to generate random energy requirements, simulate_step to simulate a single step in the energy system, run_simulation to run the entire simulation, and calculate_achieved_alpha to calculate the achieved alpha value.
