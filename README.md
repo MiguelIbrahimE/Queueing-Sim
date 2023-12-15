@@ -187,7 +187,7 @@ def create_birth_death_matrix(M, p_minus, p_plus):
     It then sets the transition probabilities for each state based on the provided probabilities.
     ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    ```python
+```python
     class EnergySystemSimulation:
     """
     A class to simulate an energy system with a Markovian ON-OFF process.
