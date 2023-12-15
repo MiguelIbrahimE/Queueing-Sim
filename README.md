@@ -188,6 +188,7 @@ def create_birth_death_matrix(M, p_minus, p_plus):
     ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ```python
+import numpy as np
     class EnergySystemSimulation:
     """
     A class to simulate an energy system with a Markovian ON-OFF process.
